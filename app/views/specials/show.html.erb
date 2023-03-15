@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @special %>
+
+<div>
+  <%= link_to "Edit this special", edit_special_path(@special) %> |
+  <%= link_to "Back to specials", specials_path %>
+
+  <%= button_to "Destroy this special", @special, method: :delete %>
+</div>

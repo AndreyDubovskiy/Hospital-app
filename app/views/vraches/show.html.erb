@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @vrach %>
+
+<div>
+  <%= link_to "Edit this vrach", edit_vrach_path(@vrach) %> |
+  <%= link_to "Back to vraches", vraches_path %>
+
+  <%= button_to "Destroy this vrach", @vrach, method: :delete %>
+</div>

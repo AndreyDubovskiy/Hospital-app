@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @otdeleny %>
+
+<div>
+  <%= link_to "Edit this otdeleny", edit_otdeleny_path(@otdeleny) %> |
+  <%= link_to "Back to otdelenies", otdelenies_path %>
+
+  <%= button_to "Destroy this otdeleny", @otdeleny, method: :delete %>
+</div>

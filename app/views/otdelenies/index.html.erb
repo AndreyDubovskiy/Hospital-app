@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Otdelenies</h1>
+
+<div id="otdelenies">
+  <% @otdelenies.each do |otdeleny| %>
+    <%= render otdeleny %>
+    <p>
+      <%= link_to "Show this otdeleny", otdeleny %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New otdeleny", new_otdeleny_path %>

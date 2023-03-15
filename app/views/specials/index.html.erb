@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Specials</h1>
+
+<div id="specials">
+  <% @specials.each do |special| %>
+    <%= render special %>
+    <p>
+      <%= link_to "Show this special", special %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New special", new_special_path %>

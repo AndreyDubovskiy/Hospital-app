@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Vraches</h1>
+
+<div id="vraches">
+  <% @vraches.each do |vrach| %>
+    <%= render vrach %>
+    <p>
+      <%= link_to "Show this vrach", vrach %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New vrach", new_vrach_path %>
