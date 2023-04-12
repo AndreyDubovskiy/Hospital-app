@@ -1,9 +1,32 @@
-<h1>New card pacient</h1>
+<h1>New Card</h1>
+<%= form_for @card do |form| %>
+  <% if @card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+      <ul>
+        <% @card.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render "form", card_pacient: @card_pacient %>
+  <div class="field">
+    <%= form.label :adress %>
+    <%= form.text_field :adress %>
+  </div>
 
-<br>
+  <div class="field">
+    <%= form.label :diagnoz %>
+    <%= form.text_field :diagnoz %>
+  </div>
 
-<div>
-  <%= link_to "Back to card pacients", card_pacients_path %>
-</div>
+  <div class="field">
+    <%= form.label :klinika_id %>
+    <%= form.collection_select :klinika_id, Klinika.all, :id, :name, { prompt: 'Выберите клинику' } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

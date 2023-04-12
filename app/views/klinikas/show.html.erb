@@ -1,10 +1,1 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @klinika %>
-
-<div>
-  <%= link_to "Edit this klinika", edit_klinika_path(@klinika) %> |
-  <%= link_to "Back to klinikas", klinikas_path %>
-
-  <%= button_to "Destroy this klinika", @klinika, method: :delete %>
-</div>
+<p><%= link_to 'Edit', edit_klinika_path(@klinika) %> | <%= link_to 'Back', klinikas_path %> | <%= link_to 'Delete', @klinika, method: :delete, data: { confirm: 'Are you sure?' } %></p>

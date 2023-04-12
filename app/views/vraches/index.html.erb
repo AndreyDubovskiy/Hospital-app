@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Vraches</h1>
+<%= link_to 'New Vrach', new_vrach_path %>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
 
-<div id="vraches">
+  <tbody>
   <% @vraches.each do |vrach| %>
-    <%= render vrach %>
-    <p>
-      <%= link_to "Show this vrach", vrach %>
-    </p>
+    <tr>
+      <td><%= vrach.name %></td>
+      <td><%= link_to 'Show', vrach %></td>
+      <td><%= link_to 'Edit', edit_vrach_path(vrach) %></td>
+      <td><%= link_to 'Destroy', vrach, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>
 
-<%= link_to "New vrach", new_vrach_path %>
+<br>
+

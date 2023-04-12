@@ -1,10 +1,36 @@
-<h1>Editing vrach</h1>
+<h1>Editing Vrach</h1>
+<%= form_with model: @vrach, method: :patch do |form| %>
+  <% if @vrach.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vrach.errors.count, "error") %> prohibited this vrach from being saved:</h2>
+      <ul>
+        <% @vrach.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render "form", vrach: @vrach %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
 
-<br>
+  <div class="field">
+    <%= form.label :otdelenie_id %>
+    <%= form.collection_select :otdelenie_id, Otdelenie.all, :id, :name, { prompt: 'Выберите Otdeleny' } %>
+  </div>
 
-<div>
-  <%= link_to "Show this vrach", @vrach %> |
-  <%= link_to "Back to vraches", vraches_path %>
-</div>
+  <div class="field">
+    <%= form.label :special_id %>
+    <%= form.collection_select :special_id, Special.all, :id, :name, { prompt: 'Выберите Special' } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Show', @vrach %> |1
+<%= link_to 'Back', vraches_path %>

@@ -1,14 +1,26 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Otdelenies</h1>
+<%= link_to 'New Otdelenie', new_otdeleny_path %>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Klinika</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
 
-<div id="otdelenies">
-  <% @otdelenies.each do |otdeleny| %>
-    <%= render otdeleny %>
-    <p>
-      <%= link_to "Show this otdeleny", otdeleny %>
-    </p>
+  <tbody>
+  <% @otdelenies.each do |otdelenie| %>
+    <tr>
+      <td><%= otdelenie.name %></td>
+      <td><%= otdelenie.klinika ? otdelenie.klinika.name : 'N/A' %></td>
+      <td><%= link_to 'Show', otdelenie %></td>
+      <td><%= link_to 'Edit', edit_otdeleny_path(otdelenie) %></td>
+      <td><%= link_to 'Destroy', otdelenie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>
 
-<%= link_to "New otdeleny", new_otdeleny_path %>
+<br>
+

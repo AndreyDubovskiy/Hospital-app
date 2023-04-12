@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
+<h1>Otdelenies</h1>
+<%= link_to 'New Special', new_special_path %>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
 
-<h1>Specials</h1>
-
-<div id="specials">
-  <% @specials.each do |special| %>
-    <%= render special %>
-    <p>
-      <%= link_to "Show this special", special %>
-    </p>
+  <tbody>
+  <% @spec.each do |s| %>
+    <tr>
+      <td><%= s.name %></td>
+      <td><%= link_to 'Show', s %></td>
+      <td><%= link_to 'Edit', edit_special_path(s) %></td>
+      <td><%= link_to 'Destroy', s, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>
 
-<%= link_to "New special", new_special_path %>
+<br>
+

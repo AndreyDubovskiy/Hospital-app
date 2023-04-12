@@ -1,10 +1,30 @@
-<h1>Editing pacient</h1>
+<h1>Editing Pacient</h1>
+<%= form_with model: @pacient, method: :patch do |form| %>
+  <% if @pacient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pacient.errors.count, "error") %> prohibited this pacient from being saved:</h2>
+      <ul>
+        <% @pacient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render "form", pacient: @pacient %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
 
-<br>
+  <div class="field">
+    <%= form.label :card_pacient_id %>
+    <%= form.collection_select :card_pacient_id, CardPacient.all, :id, :adress, { prompt: 'Выберите card_pacient' } %>
+  </div>
 
-<div>
-  <%= link_to "Show this pacient", @pacient %> |
-  <%= link_to "Back to pacients", pacients_path %>
-</div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @pacient %>
+<%= link_to 'Back', pacients_path %>

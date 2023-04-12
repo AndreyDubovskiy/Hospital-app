@@ -1,10 +1,26 @@
-<h1>Editing special</h1>
+<h1>Editing Special</h1>
+<%= form_with model: @spec, method: :patch do |form| %>
+  <% if @spec.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@spec.errors.count, "error") %> prohibited this special from being saved:</h2>
+      <ul>
+        <% @spec.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render "form", special: @special %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
 
-<br>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
 
-<div>
-  <%= link_to "Show this special", @special %> |
-  <%= link_to "Back to specials", specials_path %>
-</div>
+<% end %>
+
+<%= link_to 'Show', @spec %> |1
+<%= link_to 'Back', specials_path %>

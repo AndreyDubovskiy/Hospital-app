@@ -1,10 +1,35 @@
-<h1>Editing card pacient</h1>
+<h1>Editing Card</h1>
+<%= form_with model: @card, method: :patch do |form| %>
+  <% if @card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+      <ul>
+        <% @card.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :adress %>
+    <%= form.text_field :adress %>
+  </div>
 
-<%= render "form", card_pacient: @card_pacient %>
+  <div class="field">
+    <%= form.label :diagnoz %>
+    <%= form.text_field :diagnoz %>
+  </div>
 
-<br>
+  <div class="field">
+    <%= form.label :klinika_id %>
+    <%= form.collection_select :klinika_id, Klinika.all, :id, :name, { prompt: 'Выберите клинику' } %>
+  </div>
 
-<div>
-  <%= link_to "Show this card pacient", @card_pacient %> |
-  <%= link_to "Back to card pacients", card_pacients_path %>
-</div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Show', @card %> |1
+<%= link_to 'Back', card_pacients_path %>

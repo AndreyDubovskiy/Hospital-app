@@ -1,14 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<h1>Cards</h1>
+<%= link_to 'New Card', new_card_pacient_path %>
+<table>
+  <thead>
+  <tr>
+    <th>adress</th>
+    <th>diagnoz</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
 
-<h1>Card pacients</h1>
-
-<div id="card_pacients">
-  <% @card_pacients.each do |card_pacient| %>
-    <%= render card_pacient %>
-    <p>
-      <%= link_to "Show this card pacient", card_pacient %>
-    </p>
+  <tbody>
+  <% @cards.each do |card| %>
+    <tr>
+      <td><%= card.adress %></td>
+      <td><%= card.diagnoz %></td>
+      <td><%= link_to 'Show', card %></td>
+      <td><%= link_to 'Edit', edit_card_pacient_path(card) %></td>
+      <td><%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>
 
-<%= link_to "New card pacient", new_card_pacient_path %>
+<br>
+

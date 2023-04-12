@@ -1,70 +1,44 @@
 class VrachesController < ApplicationController
-  before_action :set_vrach, only: %i[ show edit update destroy ]
-
-  # GET /vraches or /vraches.json
-  def index
-    @vraches = Vrach.all
-  end
-
-  # GET /vraches/1 or /vraches/1.json
-  def show
-  end
-
-  # GET /vraches/new
   def new
     @vrach = Vrach.new
   end
 
-  # GET /vraches/1/edit
+  def show
+    @vrach = Vrach.find(params[:id])
+  end
   def edit
+    @vrach = Vrach.find(params[:id])
   end
 
-  # POST /vraches or /vraches.json
+  def update
+    @vrach = Vrach.find(params[:id])
+    if @vrach.update(vrach_params)
+      redirect_to vraches_path
+    else
+      render :edit
+    end
+  end
+
+  def index
+    @vraches = Vrach.all
+  end
+
+  def destroy
+    @vrach = Vrach.find(params[:id])
+    @vrach.destroy
+    redirect_to vraches_path
+  end
+
   def create
     @vrach = Vrach.new(vrach_params)
-
-    respond_to do |format|
-      if @vrach.save
-        format.html { redirect_to vrach_url(@vrach), notice: "Vrach was successfully created." }
-        format.json { render :show, status: :created, location: @vrach }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @vrach.errors, status: :unprocessable_entity }
-      end
+    if @vrach.save
+      redirect_to vraches_path
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /vraches/1 or /vraches/1.json
-  def update
-    respond_to do |format|
-      if @vrach.update(vrach_params)
-        format.html { redirect_to vrach_url(@vrach), notice: "Vrach was successfully updated." }
-        format.json { render :show, status: :ok, location: @vrach }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @vrach.errors, status: :unprocessable_entity }
-      end
-    end
+  def vrach_params
+    params.require(:vrach).permit(:name, :special_id, :otdelenie_id)
   end
-
-  # DELETE /vraches/1 or /vraches/1.json
-  def destroy
-    @vrach.destroy
-
-    respond_to do |format|
-      format.html { redirect_to vraches_url, notice: "Vrach was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_vrach
-      @vrach = Vrach.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def vrach_params
-      params.fetch(:vrach, {})
-    end
 end

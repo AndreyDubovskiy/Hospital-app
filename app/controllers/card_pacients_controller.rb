@@ -1,70 +1,44 @@
 class CardPacientsController < ApplicationController
-  before_action :set_card_pacient, only: %i[ show edit update destroy ]
-
-  # GET /card_pacients or /card_pacients.json
-  def index
-    @card_pacients = CardPacient.all
-  end
-
-  # GET /card_pacients/1 or /card_pacients/1.json
-  def show
-  end
-
-  # GET /card_pacients/new
   def new
-    @card_pacient = CardPacient.new
+    @card = CardPacient.new
   end
 
-  # GET /card_pacients/1/edit
+  def show
+    @card = CardPacient.find(params[:id])
+  end
   def edit
+    @card = CardPacient.find(params[:id])
   end
 
-  # POST /card_pacients or /card_pacients.json
-  def create
-    @card_pacient = CardPacient.new(card_pacient_params)
-
-    respond_to do |format|
-      if @card_pacient.save
-        format.html { redirect_to card_pacient_url(@card_pacient), notice: "Card pacient was successfully created." }
-        format.json { render :show, status: :created, location: @card_pacient }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @card_pacient.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /card_pacients/1 or /card_pacients/1.json
   def update
-    respond_to do |format|
-      if @card_pacient.update(card_pacient_params)
-        format.html { redirect_to card_pacient_url(@card_pacient), notice: "Card pacient was successfully updated." }
-        format.json { render :show, status: :ok, location: @card_pacient }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @card_pacient.errors, status: :unprocessable_entity }
-      end
+    @card = CardPacient.find(params[:id])
+    if @card.update(card_params)
+      redirect_to card_pacients_path
+    else
+      render :edit
     end
   end
 
-  # DELETE /card_pacients/1 or /card_pacients/1.json
+  def index
+    @cards = CardPacient.all
+  end
+
   def destroy
-    @card_pacient.destroy
+    @card = CardPacient.find(params[:id])
+    @card.destroy
+    redirect_to card_pacients_path
+  end
 
-    respond_to do |format|
-      format.html { redirect_to card_pacients_url, notice: "Card pacient was successfully destroyed." }
-      format.json { head :no_content }
+  def create
+    @card = CardPacient.new(card_params)
+    if @card.save
+      redirect_to card_pacients_path
+    else
+      render :new
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_card_pacient
-      @card_pacient = CardPacient.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def card_pacient_params
-      params.fetch(:card_pacient, {})
-    end
+  def card_params
+    params.require(:card_pacient).permit(:adress, :diagnoz, :klinika_id)
+  end
 end
