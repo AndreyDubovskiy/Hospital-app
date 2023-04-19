@@ -1,4 +1,5 @@
 class VrachesController < ApplicationController
+  before_action :authenticate_user!
   def new
     @vrach = Vrach.new
   end

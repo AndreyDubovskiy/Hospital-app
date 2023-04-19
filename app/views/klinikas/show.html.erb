@@ -1,1 +1,1 @@
-<p><%= link_to 'Edit', edit_klinika_path(@klinika) %> | <%= link_to 'Back', klinikas_path %> | <%= link_to 'Delete', @klinika, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+<p><%= link_to 'Edit', edit_klinika_path(@klinika) %> | <%= link_to 'Back', klinikas_path %> | <%= link_to 'Delete', @klinika, method: :delete, data: { turbo_method: "delete" } %></p>

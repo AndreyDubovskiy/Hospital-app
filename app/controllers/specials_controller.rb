@@ -1,4 +1,5 @@
 class SpecialsController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @spec = Special.new

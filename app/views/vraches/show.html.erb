@@ -1,5 +1,5 @@
 <div>
-  <%= link_to "Edit this vrach", edit_vrach_path(@vrach) %> |
-  <%= link_to "Back to vraches", vraches_path %>
-  <%= button_to "Destroy this vrach", @vrach, method: :delete %>
+  <%= link_to "Edit", edit_vrach_path(@vrach) %> |
+  <%= link_to "Back", vraches_path %>
+  <%= link_to "Destroy", @vrach, method: :delete, data: { turbo_method: "delete" } %>
 </div>

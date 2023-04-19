@@ -2,5 +2,5 @@
 <div>
   <%= link_to "Edit this special", edit_special_path(@special) %> |
   <%= link_to "Back to specials", specials_path %>
-  <%= button_to "Destroy this special", @special, method: :delete %>
+  <%= link_to "Destroy this special", @special, method: :delete , data: { turbo_method: "delete" }%>
 </div>

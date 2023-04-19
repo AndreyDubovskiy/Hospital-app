@@ -1,4 +1,5 @@
 class KlinikasController < ApplicationController
+  before_action :authenticate_user!
   def new
     @klinika = Klinika.new
   end

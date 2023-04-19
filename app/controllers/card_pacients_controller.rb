@@ -1,4 +1,5 @@
 class CardPacientsController < ApplicationController
+  before_action :authenticate_user!
   def new
     @card = CardPacient.new
   end

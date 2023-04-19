@@ -1,4 +1,5 @@
 class OtdeleniesController < ApplicationController
+  before_action :authenticate_user!
   def new
     @otdelenie = Otdelenie.new
   end

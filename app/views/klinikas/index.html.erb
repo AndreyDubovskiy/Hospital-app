@@ -17,7 +17,7 @@
       <td><%= klinika.adress %></td>
       <td><%= link_to 'Show', klinika %></td>
       <td><%= link_to 'Edit', edit_klinika_path(klinika) %></td>
-      <td><%= link_to 'Destroy', klinika, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', klinika, method: :delete, data: { turbo_method: "delete" } %></td>
     </tr>
   <% end %>
   </tbody>

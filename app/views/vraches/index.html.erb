@@ -14,7 +14,7 @@
       <td><%= vrach.name %></td>
       <td><%= link_to 'Show', vrach %></td>
       <td><%= link_to 'Edit', edit_vrach_path(vrach) %></td>
-      <td><%= link_to 'Destroy', vrach, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', vrach, method: :delete, data: { turbo_method: "delete" } %></td>
     </tr>
   <% end %>
   </tbody>
