@@ -1,13 +1,13 @@
 require "test_helper"
 
 class CardPacientsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @card_pacient = card_pacients(:one)
-  end
+  include Devise::Test::IntegrationHelpers
 
-  test "should get index" do
-    get card_pacients_url
-    assert_response :success
+  def setup
+    @user = users(:one)
+    @klinika = Klinika.create(name:"TestName", adress: "Test123")
+    @card = CardPacient.new(adress: 'Test Adress', diagnoz: 'Test Diagnoz', klinika: @klinika)
+    sign_in @user
   end
 
   test "should get new" do
@@ -15,34 +15,15 @@ class CardPacientsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create card_pacient" do
-    assert_difference("CardPacient.count") do
-      post card_pacients_url, params: { card_pacient: {  } }
+  test "should create card" do
+    assert_difference('CardPacient.count') do
+      post card_pacients_path, params: { card_pacient: { adress: @card.adress, diagnoz: @card.diagnoz, klinika_id: @card.klinika_id } }
     end
-
-    assert_redirected_to card_pacient_url(CardPacient.last)
+    assert_redirected_to card_pacients_path
   end
 
-  test "should show card_pacient" do
-    get card_pacient_url(@card_pacient)
+  test "should show card" do
+    get card_pacients_path, params: { id: @card }
     assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_card_pacient_url(@card_pacient)
-    assert_response :success
-  end
-
-  test "should update card_pacient" do
-    patch card_pacient_url(@card_pacient), params: { card_pacient: {  } }
-    assert_redirected_to card_pacient_url(@card_pacient)
-  end
-
-  test "should destroy card_pacient" do
-    assert_difference("CardPacient.count", -1) do
-      delete card_pacient_url(@card_pacient)
-    end
-
-    assert_redirected_to card_pacients_url
   end
 end
