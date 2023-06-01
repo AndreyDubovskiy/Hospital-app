@@ -1,27 +1,42 @@
 <h1>Klinikas</h1>
 <%= link_to 'New Klinika', new_klinika_path %>
 <br>
+<%= form_tag klinikas_path, method: :get do %>
 <table>
   <thead>
   <tr>
     <th>Name</th>
-    <th>Adress</th>
+    <th>Count</th>
+    <th>Count2</th>
     <th colspan="3"></th>
   </tr>
   </thead>
 
   <tbody>
+  <tr>
+      <td><%= text_field_tag :name, params[:name]  %><%= submit_tag (params[:commit] == 'SearchUp' ? 'SearchDown' :'SearchUp'), class: "btn"%></td>
+      <td><%= submit_tag (params[:commit] == 'Up2' ? 'Down2' :'Up2') , class: "btn"%></td>
+      <td><%= submit_tag (params[:commit] == 'Up3' ? 'Down3' :'Up3'), class: "btn"%></td>
+      <td></td>
+      <td></td>
+      <td></td>
+
+  </tr>
   <% @klinikas.each do |klinika| %>
     <tr>
       <td><%= klinika.name %></td>
-      <td><%= klinika.adress %></td>
+      <td><%= klinika.otdelenies.count %></td>
+      <td><%= klinika.otdelenies.joins(:vraches).count %></td>
       <td><%= link_to 'Show', klinika %></td>
       <td><%= link_to 'Edit', edit_klinika_path(klinika) %></td>
       <td><%= link_to 'Destroy', klinika, method: :delete, data: { turbo_method: "delete" } %></td>
     </tr>
   <% end %>
+
   </tbody>
 </table>
+<% end %>
+<%= paginate @klinikas, params: { name: params[:name], commit: params[:commit] } %>
 
 
 

@@ -8,10 +8,25 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <div class="header-container">
+      <div class="logo">
+        <h1>HospitalApp</h1>
+      </div>
+      <nav>
+        <ul class="nav-links" >
+          <li><a href="/" class="nav-links">Home</a></li>
+          <li><a href="<%= klinikas_path %>" class="nav-links">Klinika</a></li>
+          <li><a href="<%= otdelenies_path %>" class="nav-links">Otdelenies</a></li>
+          <li><a href="<%= vraches_path %>" class="nav-links">Vraches</a></li>
+          <li><a href="<%= specials_path %>" class="nav-links">Spec</a></li>
+          <li><a href="<%= card_pacients_path %>" class="nav-links">Cards</a></li>
+          <li><a href="<%= pacients_path %>" class="nav-links">Pacients</a></li>
+        </ul>
+      </nav>
+    </div>
   </head>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-
   <body>
     <%= yield %>
   </body>

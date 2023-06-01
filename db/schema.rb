@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_194905) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_202342) do
   create_table "card_pacients", force: :cascade do |t|
     t.string "adress"
     t.string "diagnoz"
     t.integer "klinika_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vrach_id"
+    t.string "number"
     t.index ["klinika_id"], name: "index_card_pacients_on_klinika_id"
+    t.index ["vrach_id"], name: "index_card_pacients_on_vrach_id"
   end
 
   create_table "klinikas", force: :cascade do |t|
@@ -25,6 +28,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_194905) do
     t.string "adress"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "year"
+    t.string "typeHospital"
+    t.string "city"
+    t.string "RatingMortality"
   end
 
   create_table "otdelenies", force: :cascade do |t|
@@ -40,6 +47,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_194905) do
     t.integer "card_pacient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "surname"
+    t.integer "age"
+    t.string "phone"
     t.index ["card_pacient_id"], name: "index_pacients_on_card_pacient_id"
   end
 
@@ -67,8 +77,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_194905) do
     t.integer "special_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "surname"
+    t.integer "age"
+    t.integer "card_pacient_id"
+    t.index ["card_pacient_id"], name: "index_vraches_on_card_pacient_id"
     t.index ["otdelenie_id"], name: "index_vraches_on_otdelenie_id"
     t.index ["special_id"], name: "index_vraches_on_special_id"
   end
 
+  add_foreign_key "card_pacients", "vraches"
+  add_foreign_key "vraches", "card_pacients"
 end

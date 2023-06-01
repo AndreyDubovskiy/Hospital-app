@@ -2,8 +2,11 @@ class CardPacient < ApplicationRecord
   include ActiveModel::Validations
   validates :adress, presence: true
   validates :diagnoz, presence: true
+  validates :number, presence: true
   belongs_to :klinika
   has_one :pacient
+  belongs_to :vrach
+  paginates_per 10
 
   def self.all_by_SQL()
     ActiveRecord::Base.connection.execute("SELECT * FROM card_pacients ")

@@ -1,3 +1,65 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Стили для верхней панели */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+nav {
+    flex: 1;
+    text-align: right;
+}
+
+.nav-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.nav-links li:last-child {
+    margin-right: 0;
+}
+
+.nav-links a {
+    transition: color 0.3s ease;
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+    width: 120%;
+    margin-right: 0.625%;
+    text-align: center;
+    line-height: 3;
+    color: black;
+}
+
+.nav-links a:hover {
+    color: #ccc;
+}
+
+
 table {
     width: 100%;
     margin-bottom: 20px;
@@ -99,4 +161,9 @@ a:active {
     border: 1px solid #bdbdbd;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+h1.main  {
+    color: #333;
+    text-align: center; /* Додано стиль центрування */
 }

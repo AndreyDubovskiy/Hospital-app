@@ -1,1 +1,70 @@
-<p><%= link_to 'Edit', edit_klinika_path(@klinika) %> | <%= link_to 'Back', klinikas_path %> | <%= link_to 'Delete', @klinika, method: :delete, data: { turbo_method: "delete" } %></p>
+<p>
+  <%= "Name: " +@klinika.name %>
+</p>
+<p>
+  <%= "Address: " +@klinika.adress %>
+</p>
+<p>
+  <%= "Otdelenies: " +@klinika.count_otdelenies.to_s %>
+</p>
+<p>
+  <%= "Doctors: " +@klinika.count_doctors.to_s %>
+</p>
+<p>
+  <%= "City: " +@klinika.city.to_s %>
+</p>
+<p>
+  <%= "Type: " +@klinika.typeHospital.to_s %>
+</p>
+<p>
+  <%= "RatingMorality: " +@klinika.RatingMortality.to_s %>
+</p>
+<%= form_tag @klinika, method: :get do %>
+<table>
+  <thead>
+  <tr>
+    <th>FIO</th>
+    <th>Age</th>
+    <th>Card number</th>
+    <th>Phone</th>
+    <th>Doctor</th>
+    <th colspan="1"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+    <td><%= text_field_tag :name, params[:name]  %><%= submit_tag (params[:commit] == 'SearchUp1' ? 'SearchDown1' :'SearchUp1'), class: "btn"%></td>
+    <td><%= text_field_tag :age, params[:age]  %><%= submit_tag (params[:commit] == 'SearchUp2' ? 'SearchDown2' :'SearchUp2') , class: "btn"%></td>
+    <td></td>
+    <td><%= text_field_tag :phone, params[:phone]  %><%= submit_tag (params[:commit] == 'SearchUp3' ? 'SearchDown3' :'SearchUp3'), class: "btn"%></td>
+    <td></td>
+    <td></td>
+
+  </tr>
+  <% @card_pacients.each do |card_pacient| %>
+    <tr>
+      <td><%= card_pacient.pacient.name + " " + card_pacient.pacient.surname %></td>
+      <td><%= card_pacient.pacient.age.to_s %></td>
+      <td><%= card_pacient.number %></td>
+      <td><%= card_pacient.pacient.phone %></td>
+      <% if card_pacient.vrach %>
+        <td><%= link_to card_pacient.vrach.name+" "+card_pacient.vrach.surname, card_pacient.vrach %></td>
+      <% else %>
+        <td>None</td>
+      <% end %>
+      <td><%= link_to 'Show', card_pacient.pacient %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+<br>
+
+<br>
+
+
+<p><%= link_to 'Edit', edit_klinika_path(@klinika) %> |
+  <%= link_to 'Back', klinikas_path %> |
+  <%= link_to 'Delete', @klinika, method: :delete, data: { turbo_method: "delete" } %></p>
+<%= paginate @card_pacients, params: { name: params[:name], age: params[:age], phone: params[:phone], commit: params[:commit] } %>

@@ -2,8 +2,21 @@ class Klinika < ApplicationRecord
   include ActiveModel::Validations
   validates :name, presence: true
   validates :adress, presence: true
-  has_many :otdelenies
+  validates :year, presence: true
+  validates :typeHospital, presence: true
+  validates :city, presence: true
+  validates :RatingMortality, presence: true
+  has_many :otdelenies, class_name: 'Otdelenie'
   has_many :card_pacients
+  paginates_per 10
+
+  def count_doctors()
+    otdelenies.joins(:vraches).count
+  end
+
+  def count_otdelenies()
+    otdelenies.count
+  end
 
   def self.all_by_SQL()
     ActiveRecord::Base.connection.execute("SELECT * FROM klinikas ")
